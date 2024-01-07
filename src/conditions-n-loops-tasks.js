@@ -419,36 +419,46 @@ function getSpiralMatrix(size) {
  *  ]                 ]
  */
 function rotateMatrix(matrix) {
-  const matrixSize = matrix.length;
-  let currentSize = matrix.length;
+  const myMatrix = matrix;
+  const matrixSize = myMatrix.length;
+  let currentSize = myMatrix.length;
   let iteration = 0;
 
   while (iteration < currentSize) {
     for (let i = iteration + 1; i < currentSize; i += 1) {
       const [iA, jA] = [iteration, i];
       const [iB, jB] = [i, currentSize - 1];
-      [matrix[iA][jA], matrix[iB][jB]] = [matrix[iB][jB], matrix[iA][jA]];
+      [myMatrix[iA][jA], myMatrix[iB][jB]] = [
+        myMatrix[iB][jB],
+        myMatrix[iA][jA],
+      ];
     }
 
     for (let i = iteration + 1; i < currentSize; i += 1) {
       const [iA, jA] = [iteration, i];
       const [iB, jB] = [currentSize - 1, matrixSize - 1 - i];
 
-      [matrix[iA][jA], matrix[iB][jB]] = [matrix[iB][jB], matrix[iA][jA]];
+      [myMatrix[iA][jA], myMatrix[iB][jB]] = [
+        myMatrix[iB][jB],
+        myMatrix[iA][jA],
+      ];
     }
 
     for (let i = iteration + 1; i < currentSize; i += 1) {
       const [iA, jA] = [iteration, i];
       const [iB, jB] = [matrixSize - 1 - i, iteration];
 
-      [matrix[iA][jA], matrix[iB][jB]] = [matrix[iB][jB], matrix[iA][jA]];
+      [myMatrix[iA][jA], myMatrix[iB][jB]] = [
+        myMatrix[iB][jB],
+        myMatrix[iA][jA],
+      ];
     }
 
     iteration += 1;
     currentSize -= 1;
   }
 
-  return matrix;
+  return myMatrix;
 }
 
 /**
@@ -467,16 +477,17 @@ function rotateMatrix(matrix) {
  */
 function sortByAsc(arr, left = 0, right = arr.length - 1) {
   function partition(items, l, r) {
-    const pivot = items[r];
+    const myItems = items;
+    const pivot = myItems[r];
     let i = l - 1;
 
     for (let j = l; j < r; j += 1) {
-      if (items[j] < pivot) {
+      if (myItems[j] < pivot) {
         i += 1;
-        [items[i], items[j]] = [items[j], items[i]];
+        [myItems[i], myItems[j]] = [myItems[j], myItems[i]];
       }
     }
-    [items[i + 1], items[r]] = [items[r], items[i + 1]];
+    [myItems[i + 1], myItems[r]] = [myItems[r], myItems[i + 1]];
 
     return i + 1;
   }
